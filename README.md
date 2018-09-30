@@ -12,3 +12,10 @@ Beware, you must be using a MySQL-compatible database backend for Kodi/Mr.MC and
 * Doesn't handle marking stuff as unwatched
 * Did not confirm if it updates playcounts or not
 * You're still repsonsible for backing up the new `watchedlist` db in your Kodi database
+* The Kodi db version is hardcoded (`MyVideos107`) at the moment
+* Prone to break in future (e.g. can we rely on column `c13` to be episode number?)
+
+## Links
+
+* [KODI Wiki: Add-on:WatchedList](https://kodi.wiki/view/Add-on:WatchedList)
+* [WatchedList](https://github.com/SchapplM/xbmc-addon-service-watchedlist)

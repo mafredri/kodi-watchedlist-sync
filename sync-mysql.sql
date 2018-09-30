@@ -85,4 +85,4 @@ INSERT INTO watchedlist.movie_watched (idMovieImdb, playCount, lastPlayed, title
 
 DROP TEMPORARY TABLE watchedlist.moviesync;
 
-ROLLBACK;
+COMMIT;

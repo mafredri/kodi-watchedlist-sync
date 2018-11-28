@@ -52,7 +52,7 @@ CREATE TEMPORARY TABLE watchedlist.tvsync
 INSERT INTO watchedlist.tvshows
 	SELECT s.idShow, s.title
 	FROM watchedlist.tvsync s
-	JOIN watchedlist.tvshows tv USING (idShow)
+	LEFT JOIN watchedlist.tvshows tv USING (idShow)
 	WHERE tv.idShow IS NULL;
 
 INSERT INTO watchedlist.episode_watched (idShow, season, episode, playCount, lastPlayed)

@@ -55,6 +55,20 @@ INSERT INTO watchedlist.tvshows
 	LEFT JOIN watchedlist.tvshows tv USING (idShow)
 	WHERE tv.idShow IS NULL;
 
+/**
+ * Ensure we're not missing any shows (bug fix for missing LEFT in the join above).
+ */
+INSERT INTO watchedlist.tvshows
+	SELECT uniqueid_value AS idShow, t.c00 AS title
+	FROM MyVideos107.tvshow_view t
+	WHERE t.uniqueid_value IN (
+		SELECT e.idShow
+		FROM watchedlist.episode_watched e
+		LEFT JOIN watchedlist.tvshows t using (idShow)
+		WHERE t.idShow IS NULL
+		ORDER BY idShow
+	);
+
 INSERT INTO watchedlist.episode_watched (idShow, season, episode, playCount, lastPlayed)
 	SELECT idShow, season, episode, playCount, lastPlayed
 	FROM watchedlist.tvsync;

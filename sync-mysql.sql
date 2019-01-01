@@ -2,7 +2,7 @@ BEGIN;
 
 CREATE DATABASE IF NOT EXISTS watchedlist;
 
-CREATE TABLE IF NOT EXISTS watchedlist.episode_watched (
+CREATE TABLE IF NOT EXISTS watchedlist.tvshows (
 	idShow int NOT NULL,
 	title text DEFAULT NULL,
 	PRIMARY KEY (idShow)

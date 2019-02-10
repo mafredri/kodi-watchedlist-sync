@@ -50,7 +50,7 @@ CREATE TEMPORARY TABLE watchedlist.tvsync
 		AND ew.idShow IS NULL;
 
 INSERT INTO watchedlist.tvshows
-	SELECT s.idShow, s.title
+	SELECT DISTINCT(s.idShow), s.title
 	FROM watchedlist.tvsync s
 	LEFT JOIN watchedlist.tvshows tv USING (idShow)
 	WHERE tv.idShow IS NULL;

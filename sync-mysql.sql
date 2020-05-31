@@ -39,15 +39,16 @@ CREATE TEMPORARY TABLE watchedlist.tvsync
 			e.c13 AS episode,
 			e.playCount,
 			UNIX_TIMESTAMP(e.lastPlayed) AS lastPlayed
-		FROM MyVideos107.episode_view e
-		JOIN MyVideos107.tvshow_view t ON (t.idShow = e.idShow)
-		JOIN MyVideos107.season_view s ON (s.idSeason = e.idSeason)
+		FROM MyVideos116.episode_view e
+		JOIN MyVideos116.tvshow_view t ON (t.idShow = e.idShow)
+		JOIN MyVideos116.season_view s ON (s.idSeason = e.idSeason)
 	) AS kodi
 	LEFT JOIN watchedlist.episode_watched ew USING (idShow, season, episode)
 	WHERE
 		kodi.lastPlayed IS NOT NULL
 		AND kodi.playCount IS NOT NULL
-		AND ew.idShow IS NULL;
+		AND ew.idShow IS NULL
+	ORDER BY idShow, season, episode, lastPlayed;
 
 INSERT INTO watchedlist.tvshows
 	SELECT DISTINCT(s.idShow), s.title
@@ -60,7 +61,7 @@ INSERT INTO watchedlist.tvshows
  */
 INSERT INTO watchedlist.tvshows
 	SELECT uniqueid_value AS idShow, t.c00 AS title
-	FROM MyVideos107.tvshow_view t
+	FROM MyVideos116.tvshow_view t
 	WHERE t.uniqueid_value IN (
 		SELECT e.idShow
 		FROM watchedlist.episode_watched e
@@ -71,7 +72,8 @@ INSERT INTO watchedlist.tvshows
 
 INSERT INTO watchedlist.episode_watched (idShow, season, episode, playCount, lastPlayed)
 	SELECT idShow, season, episode, playCount, lastPlayed
-	FROM watchedlist.tvsync;
+	FROM watchedlist.tvsync
+	ON DUPLICATE KEY UPDATE lastPlayed = VALUES(lastPlayed);
 
 DROP TEMPORARY TABLE watchedlist.tvsync;
 
@@ -85,7 +87,7 @@ CREATE TEMPORARY TABLE watchedlist.moviesync
 			playCount,
 			UNIX_TIMESTAMP(lastPlayed) AS lastPlayed,
 			c00 AS title
-		FROM MyVideos107.movie_view
+		FROM MyVideos116.movie_view
 	) AS kodi
 	LEFT JOIN watchedlist.movie_watched mw USING (idMovieImdb)
 	WHERE

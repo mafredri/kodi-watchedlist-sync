@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS watchedlist.episode_watched (
 	season int NOT NULL,
 	episode int NOT NULL,
 	playCount int DEFAULT NULL,
-	lastChange int DEFAULT NULL,
+	lastChange int DEFAULT 0,
 	lastPlayed int DEFAULT NULL,
 	PRIMARY KEY (idShow, season, episode)
 );
@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS watchedlist.episode_watched (
 CREATE TABLE IF NOT EXISTS watchedlist.movie_watched (
 	idMovieImdb int NOT NULL,
 	playCount int DEFAULT NULL,
-	lastChange int DEFAULT NULL,
+	lastChange int DEFAULT 0,
 	lastPlayed int DEFAULT NULL,
 	title text DEFAULT NULL,
 	PRIMARY KEY (idMovieImdb)

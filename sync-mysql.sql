@@ -3,25 +3,25 @@ BEGIN;
 CREATE DATABASE IF NOT EXISTS watchedlist;
 
 CREATE TABLE IF NOT EXISTS watchedlist.tvshows (
-	idShow int NOT NULL,
+	idShow int unsigned NOT NULL,
 	title text DEFAULT NULL,
 	PRIMARY KEY (idShow)
 );
 
 CREATE TABLE IF NOT EXISTS watchedlist.episode_watched (
-	idShow int NOT NULL,
-	season int NOT NULL,
-	episode int NOT NULL,
-	playCount int DEFAULT NULL,
-	lastChange int DEFAULT 0,
+	idShow int unsigned NOT NULL,
+	season int unsigned NOT NULL,
+	episode int unsigned NOT NULL,
+	playCount tinyint unsigned DEFAULT NULL,
+	lastChange int DEFAULT NULL,
 	lastPlayed int DEFAULT NULL,
 	PRIMARY KEY (idShow, season, episode)
 );
 
 CREATE TABLE IF NOT EXISTS watchedlist.movie_watched (
-	idMovieImdb int NOT NULL,
-	playCount int DEFAULT NULL,
-	lastChange int DEFAULT 0,
+	idMovieImdb int unsigned NOT NULL,
+	playCount tinyint unsigned DEFAULT NULL,
+	lastChange int DEFAULT NULL,
 	lastPlayed int DEFAULT NULL,
 	title text DEFAULT NULL,
 	PRIMARY KEY (idMovieImdb)

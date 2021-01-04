@@ -6,6 +6,10 @@ Sync Kodi watched status without watchedlist plugin (MySQL)
 
 Beware, you must be using a MySQL-compatible database backend for Kodi/Mr.MC and run the SQL directly against the DB.
 
+## Tips
+
+Can be used in combination with [mafredri/kodi-remote-watchedlist](https://github.com/mafredri/kodi-remote-watchedlist) for two-way sync. It also properly handles incrementing the playcount whereas this project only sets it to one.
+
 ## Limitations
 
 * This is only a one-way sync (from Kodi)
